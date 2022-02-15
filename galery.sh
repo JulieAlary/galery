@@ -25,6 +25,10 @@ echo '<!DOCTYPE html>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <body>' >> $sortie
+echo '<div class="jumbotron">'>> $sortie
+  echo '<h1 class="text-center">Mes recettes</h1>'>>$sortie
+echo '</div>'>>$sortie
+
 echo '<div class="container">'>> $sortie
   echo '<div class="row">'>> $sortie
 
@@ -33,17 +37,17 @@ echo '<div class="container">'>> $sortie
   images='*.jpeg'
   for image in $images
   do
-    titles=$(echo $image | tr "-" "\n" | tr -d 0-9) #remove numbers & extension
+    titles=$(echo $image | tr "-" "\n") #remove numbers & extension
 
     convert $image -thumbnail '200x200>' thumbnails/$image
     
     #bootstrap style card
     echo '<div class="col-md-4 col-sm-4 col-lg-3" style="margin-top:50px;>'>>$sortie
       echo '<div class="card" style="width: 18rem;">'>> $sortie
-        echo '<a href="'$image'"><img class="card-img-top" src="thumbnails/'$image'" alt="Card image cap"></a>'>>$sortie
+        echo '<a href="'$image'"><img class="card-img-top img-responsive center-block" src="thumbnails/'$image'" alt="Card image cap"></a>'>>$sortie
           echo '<div class="card-body">'>>$sortie
           echo '<h5 class="card-title text-capitalize text-center">'"${titles%.*}"'</h5>'>>$sortie
-          echo '<p class="card-text">Some content</p><a href="#" class="btn btn-primary">Go somewhere</a>'>>$sortie
+          echo '<p class="card-text text-center">Some content</p><a href="#" class="btn btn-primary center-block">Go somewhere</a>'>>$sortie
       echo '</div>'>>$sortie
     echo '</div>'>>$sortie
   done
